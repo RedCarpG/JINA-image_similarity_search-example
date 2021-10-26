@@ -1,0 +1,7 @@
+!Flow                                       # This file defines the indexing flow for this example
+version: '1'                                # Version number for jaml config
+with:                                       # The with keyword defines parameters for the flow
+  workspace: "workspace"                    # Set the workspace path
+  py_modules:                               # Define the location of the executors implementation
+    - executors.py
+executors:                                  # List of executors for this flow

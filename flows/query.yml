@@ -1,0 +1,10 @@
+!Flow                                       # This file defines the flow for querying data
+version: '1'                                # Version number for jaml config
+with:                                       # Define additional parameters
+  workspace: "workspace"                    # Workspace folder name
+  py_modules:                               # Module list to find the executors
+    - executors.py                          # Our executors file with all executor definitions
+  read_only: true                           # For querying, allow only reading
+  rest_api: true                            # Start the REST api
+  port_expose: $JINA_PORT                   # Port to run the restful API on
+executors:                                  # List of executors for this flow
