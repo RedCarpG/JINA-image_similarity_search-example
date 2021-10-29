@@ -18,7 +18,7 @@ pods:
     uses: ImageProcessor
     py_modules: '../executors/image_encoder.py'
     read_only: true                               
-    needs: image_loader     
+    needs: image_loader
 
   - name: image_encoder                           
     uses: TfModelEncoder
