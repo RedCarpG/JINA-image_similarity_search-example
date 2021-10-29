@@ -101,16 +101,23 @@ _____
 This diagram provides a visual representation of the Flows in this example; Showing which executors are used in which order.
 Remember, our goal is to compare vectors representing the semantics of images with vectors encoding the semantics of short text descriptions.
 
-### Indexing
-![](visualizations/index.png)  
+### - **Indexing**
+![](visualizations/flow_index.png)  
 The index flow configuration [Flow configuration](flows/query.yml).
 
 
-### Querying
-![](visualizations/query.png)  
+### - **Querying**
+![](visualizations/flow_query.png)  
 The query flow configuration [Flow configuration](flows/query.yml).
 
+### - **Explanation**
 
+In the example, the executors `image_loader`, `image_processor` and `image_encoder` are defined in the folder [executors](executors). The executor `image_indexer` uses the `SimpleIndexer` from [Jina Hub](https://hub.jina.ai/executor/zb38xlt4).
+
+- **ImageUriLoader**: Take Documents with image uri and load ndarrays to *Document.blob*.
+- **ImageProcessor**: Preprocess image ndarrays, including resizing and normalization.
+- **TFModelEncoder**: Encode image ndarrays to its *Document.embedding*, using Resnet50 from Tensorflow.
+- **SimpleIndexer**: Calculate cosine similarity distance, and find the most similar images.
 
 ## 🔮 Overview of the files
 
@@ -143,6 +150,7 @@ The query flow configuration [Flow configuration](flows/query.yml).
 - Use transfer learning method to improve the performance. It is possible to train the pretrained ML model with index dataset.
 - Use other dataset examples
 - Complete other features to improve performance
+- Add test
 
 
 ## 💁‍♂️ Contributor
