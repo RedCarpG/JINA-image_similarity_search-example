@@ -1,0 +1,31 @@
+jtype: Flow                                     
+
+with:                                       
+          
+  workspace: $JINA_WORKSPACE                
+  port_expose: $JINA_PORT                   
+
+executors:                                  
+
+  - name: image_loader 
+    uses: ImageUriLoader
+    py_modules: '../executors/image_loader.py'
+    read_only: true
+    needs: gateway
+    
+  - name: image_processor
+    uses: ImageProcessor
+    py_modules: '../executors/image_encoder.py'
+    read_only: true                               
+    needs: image_loader     
+
+  - name: image_encoder                           
+    uses: TfModelEncoder
+    py_modules: '../executors/image_encoder.py'
+    needs: image_processor     
+
+  - name: image_indexer                          
+    uses: 'jinahub://SimpleIndexer'  
+    force: True
+    read_only: true
+    needs: image_encoder
