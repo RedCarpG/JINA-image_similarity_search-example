@@ -3,18 +3,27 @@ import os
 from jina.logging.logger import JinaLogger
 
 def _check_query_result(result_response):
-    doc = result_response[0].docs[0]
+    logger = JinaLogger("query_result")
 
-    # Image doc matches are text:
-    if doc.matches:
-        print("- Find Matches: ")
-        for m in doc.matches:
-            print(
-                f'\t@ image: "{m.tags["path"]}"; '
-                f' score: {1 - m.scores["cosine"].value:.4f},'
-             )
-    else:
-        print("- Match didn't find")
+    # Find matches for each query doc
+    for doc in result_response[0].docs:
+    
+        if doc.matches:
+            match_info = ""
+            for m in doc.matches:
+                match_info += f'\n\t@ IMAGE: {m.tags["name"]: <15};  SCORE: {1 - m.scores["cosine"].value:.4f};  PATH: {m.tags["path"]: <25}'
+            logger.info(
+                f"\n==========================="
+                f"\n- Image: {doc.tags__path}"
+                f"\n- Find Matches: "
+                f"{match_info}"
+                f"\n===========================")
+        else:
+            logger.info(
+                f"\n==========================="
+                f"\n- Image: {doc.tags__path}"
+                f"\n- Match didn't find"
+                f"\n===========================")
 
 def _index_data_generator(dir, num_docs=None):
     logger = JinaLogger('index_generator')
@@ -72,6 +81,8 @@ def index_restful():
         flow.block()
 
 def query(query_image):
+    logger = JinaLogger("query_flow")
+
     flow = Flow().load_config('query.yml')
     with flow:
         parameters = {'img_path': query_image}
@@ -81,8 +92,7 @@ def query(query_image):
         result_response = flow.post(on='/search', 
                                  parameters=parameters,
                                  return_results=True)
-        print(f'Request duration: {time.time() - start}')
-        print(f'--- Searching with image {query_image} ---\n')
+        logger.info(f'Request duration: {time.time() - start}')
         _check_query_result(result_response)
 
 def query_restful():
