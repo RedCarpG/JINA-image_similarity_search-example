@@ -46,11 +46,7 @@ def app(task, num_docs, request_size, data_set, query_image, force):
                             f"\n\tPlease index first via `python main.py -t index`"
                             f"\n------------------------------------------------------------------------")
             sys.exit(1)
-        else:
-            logger.info(
-                f"\n------------------------------------------------------------------------"
-                f"\n\t🤖🤖🤖 Cleaning workspace {workspace}"
-                f"\n------------------------------------------------------------------------")
+            
     if task == 'index':
         data_path = "data/"+data_set
         logger.info(

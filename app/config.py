@@ -2,8 +2,7 @@ import os
 
 MAX_DOCS = int(os.environ.get("JINA_MAX_DOCS", 10000))
 
-DEFAULT_QUERY_IMAGE = 'data/example.jpg'
-DEFAULT_QUERY_TEXT = 'example'
+DEFAULT_QUERY_IMAGE = 'data/toy_data/example.jpg'
 
 BACKEND_PORT = 12345
 WORKSPACE_DIR = 'workspace'
