@@ -28,7 +28,7 @@ class ImageUriLoader(Executor):
         return document_img
 
     @requests(on='/index')
-    def index_directory(self, docs: DocumentArray, parameters: dict, **kwargs):
+    def index_directory(self, docs: DocumentArray, parameters: dict = None, **kwargs):
         docs = DocumentArray(list(filter(lambda doc: doc.modality=='image', docs)))
 
         if not docs:
@@ -60,7 +60,7 @@ class ImageUriLoader(Executor):
                                         'height': img.size[0],
                                         'width': img.size[1]
                                         },
-                                    'name': img_path,
+                                    'name': img_path.split('/')[-1],
                                     'path': img_path,
                                     }
                                 )
