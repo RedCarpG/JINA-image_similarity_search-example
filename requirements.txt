@@ -2,5 +2,5 @@ jina[standard,rich]==2.1.12
 numpy==1.19.5
 click==8.0.3
 Pillow==8.4.0
-tensorflow==2.6.0
+tensorflow>=2.6.1
 # keras==2.6.0
