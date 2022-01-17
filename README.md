@@ -156,7 +156,7 @@ In the example, the executors `image_loader`, `image_processor` and `image_encod
 ## 💁‍♂️ Contributor
 
 - [LinkedIn](https://www.linkedin.com/in/peng-gao-fr/) - GP
-- [Github](https://github.com/NatakuG) - NatakuG
+- [Github](https://github.com/RedCarpG) - NatakuG
 
 ## 🤖 Jina AI
 
